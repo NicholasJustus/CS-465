@@ -1,0 +1,89 @@
+<section class="form-page">
+  <a class="back-link" routerLink="/trips">← Back to trip listing</a>
+
+  <h1>{{ isEditMode ? 'Edit Trip' : 'Add a Trip' }}</h1>
+  <p class="intro">{{ isEditMode ? 'Update the trip details and save your changes.' : 'Enter the details for the new trip.' }}</p>
+
+  @if (loading) {
+    <p class="notice">Loading trip details...</p>
+  } @else {
+    @if (errorMessage) {
+      <p class="notice error" role="alert">{{ errorMessage }}</p>
+    }
+
+    <form #tripForm="ngForm" (ngSubmit)="saveTrip(tripForm)" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="code">Trip code *</label>
+          <input id="code" name="code" [(ngModel)]="trip.code" required maxlength="30" [readonly]="isEditMode" #code="ngModel">
+          @if (code.invalid && (code.touched || tripForm.submitted)) {
+            <small class="field-error">Trip code is required.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="name">Trip name *</label>
+          <input id="name" name="name" [(ngModel)]="trip.name" required maxlength="100" #name="ngModel">
+          @if (name.invalid && (name.touched || tripForm.submitted)) {
+            <small class="field-error">Trip name is required.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="length">Length *</label>
+          <input id="length" name="length" [(ngModel)]="trip.length" required placeholder="3 nights / 4 days" #length="ngModel">
+          @if (length.invalid && (length.touched || tripForm.submitted)) {
+            <small class="field-error">Length is required.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="start">Start date *</label>
+          <input id="start" type="date" name="start" [(ngModel)]="trip.start" required #start="ngModel">
+          @if (start.invalid && (start.touched || tripForm.submitted)) {
+            <small class="field-error">Start date is required.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="resort">Resort *</label>
+          <input id="resort" name="resort" [(ngModel)]="trip.resort" required placeholder="Coral Bay, 4 stars" #resort="ngModel">
+          @if (resort.invalid && (resort.touched || tripForm.submitted)) {
+            <small class="field-error">Resort is required.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="perPerson">Price per person (USD) *</label>
+          <input id="perPerson" type="number" name="perPerson" [(ngModel)]="trip.perPerson" required min="0" step="0.01" #perPerson="ngModel">
+          @if (perPerson.invalid && (perPerson.touched || tripForm.submitted)) {
+            <small class="field-error">Enter a valid price of zero or more.</small>
+          }
+        </div>
+
+        <div class="field full-width">
+          <label for="image">Image path *</label>
+          <input id="image" name="image" [(ngModel)]="trip.image" required placeholder="images/reef1.jpg" #image="ngModel">
+          @if (image.invalid && (image.touched || tripForm.submitted)) {
+            <small class="field-error">Image path is required.</small>
+          }
+        </div>
+
+        <div class="field full-width">
+          <label for="description">Description *</label>
+          <textarea id="description" name="description" [(ngModel)]="trip.description" required rows="5" #description="ngModel"></textarea>
+          @if (description.invalid && (description.touched || tripForm.submitted)) {
+            <small class="field-error">Description is required.</small>
+          }
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="button primary" type="submit" [disabled]="saving">
+          {{ saving ? 'Saving...' : (isEditMode ? 'Save Changes' : 'Add Trip') }}
+        </button>
+        <a class="button secondary" routerLink="/trips">Cancel</a>
+      </div>
+    </form>
+  }
+</section>

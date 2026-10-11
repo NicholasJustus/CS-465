@@ -1,0 +1,28 @@
+<article class="card">
+  <div class="card-heading">
+    <h2>{{ trip.name }}</h2>
+    <span class="trip-code">{{ trip.code }}</span>
+  </div>
+
+  <img
+    class="trip-image"
+    [src]="'http://localhost:3000/' + trip.image"
+    [alt]="trip.name"
+    (error)="$any($event.target).style.display='none'"
+  >
+
+  <p><strong>Length:</strong> {{ trip.length }}</p>
+  <p><strong>Start:</strong> {{ trip.start | date:'mediumDate' }}</p>
+  <p><strong>Resort:</strong> {{ trip.resort }}</p>
+  <p><strong>Price per person:</strong> {{ trip.perPerson | currency }}</p>
+  <p class="description">{{ trip.description }}</p>
+
+  <div class="card-actions">
+    <a class="button edit" [routerLink]="['/trips', trip.code, 'edit']">Edit</a>
+    <button
+      class="button delete"
+      type="button"
+      (click)="deleteRequested.emit(trip)"
+    >Delete</button>
+  </div>
+</article>

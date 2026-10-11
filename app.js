@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -23,6 +24,9 @@ app.set('view engine', 'hbs');
 
 hbs.registerPartials(path.join(__dirname, 'app_server', 'views', 'partials'));
 
+app.use(cors({
+    origin: 'http://localhost:4200'
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

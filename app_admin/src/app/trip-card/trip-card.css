@@ -1,0 +1,62 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #d8e0e4;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .06);
+}
+
+.card-heading {
+  margin-bottom: 10px;
+}
+
+.card h2 {
+  margin: 0 0 6px;
+  color: #234b63;
+  font-size: 1.25rem;
+}
+
+.trip-code {
+  color: #647782;
+  font-size: .85rem;
+}
+
+.card p {
+  margin: 8px 0;
+  line-height: 1.45;
+}
+
+.description {
+  flex-grow: 1;
+  overflow-wrap: anywhere;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.button {
+  display: inline-block;
+  padding: 9px 13px;
+  border: 0;
+  border-radius: 5px;
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.edit {
+  color: #fff;
+  background: #234b63;
+}
+
+.delete {
+  color: #842029;
+  background: #f8d7da;
+}

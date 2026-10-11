@@ -1,0 +1,32 @@
+
+<section class="trip-listing-heading">
+  <div>
+    <h1>Manage Trips</h1>
+    <p>View, add, and update trips in the Travlr Getaways database.</p>
+  </div>
+
+  <a class="button primary" routerLink="/trips/new">Add Trip</a>
+</section>
+
+@if (successMessage) {
+  <p class="notice success" role="status">{{ successMessage }}</p>
+}
+
+@if (errorMessage) {
+  <p class="notice error" role="alert">{{ errorMessage }}</p>
+}
+
+@if (loading) {
+  <p class="status-message">Loading trips...</p>
+} @else if (trips.length === 0) {
+  <p class="status-message">No trips found. Add a trip to get started.</p>
+} @else {
+  <div class="trip-list">
+    @for (trip of trips; track trip.code) {
+      <app-trip-card
+        [trip]="trip"
+        (deleteRequested)="deleteTrip($event)">
+      </app-trip-card>
+    }
+  </div>
+}

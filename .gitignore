@@ -66,3 +66,9 @@ typings/
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+
+# Visual Studio workspace files
+.vs/
+
+# Submission archives
+*.zip
